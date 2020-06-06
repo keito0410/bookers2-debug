@@ -1,0 +1,36 @@
+<table class="table">
+  <% if @model == 'user' %>
+    <thead>
+      <tr>
+        <th>name</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @datas.each do |user| %>
+      <tr>
+        <td><%= attachment_image_tag(user, :profile_image, fallback: "no-image-mini.jpg", size: "50x50") %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to "Show", user_path(user), class: "user_#{user.id}" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+
+      <tr>
+        <th>title</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @datas.each do |book| %>
+      <tr>
+        <td><%= attachment_image_tag(book.user, :profile_image, fallback: "no-image-mini.jpg", size: "50x50") %></td>
+        <td><%= book.title %></td>
+        <td><%= link_to "Show", book_path(book.id) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
+  <!--users一覧 -->

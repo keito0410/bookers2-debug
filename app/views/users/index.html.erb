@@ -22,7 +22,7 @@
 				<td><%= attachment_image_tag(user, :profile_image, fallback: "no-image-mini.jpg", size: "50x50") %></td>
 				<td><%= user.name%></td>
 				<td><%= render 'relationships/follow_button', user: user %></td>
-				<td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
+				<td><%= link_to "Show", user_path(user), class: "user_#{user.id}" %></td>
 			</tr>
 			<% end %>
 		</tbody>
@@ -30,5 +30,4 @@
 	<!--users一覧 -->
   </div>
 </div>
-
 
