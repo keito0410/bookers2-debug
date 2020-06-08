@@ -17,6 +17,10 @@ class User < ApplicationRecord
   validates :name, presence: true, length: {maximum: 20, minimum: 2}
   validates :introduction, length: {maximum: 50}
 
+  # 住所登録時に緯度・経度が自動設定
+  geocoded_by :address_city
+  after_validation :geocode
+
   def follow(other_user)
     unless self == other_user
       self.relationships.find_or_create_by(follow_id: other_user.id)
@@ -31,4 +35,16 @@ class User < ApplicationRecord
   def following?(other_user)
     self.followings.include?(other_user)
   end
+
+  include JpPrefecture
+    jp_prefecture :prefecture_code
+
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+
 end
