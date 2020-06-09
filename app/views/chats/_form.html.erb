@@ -1,0 +1,6 @@
+<%= form_with(model: [@room], remote: true) do |f| %>
+  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
+  <%= f.hidden_field :chat_id, :value => @chat.id %>
+  <br>
+  <%= f.submit "投稿する" %>
+<% end %>

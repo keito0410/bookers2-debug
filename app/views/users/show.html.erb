@@ -3,6 +3,20 @@
 	<%= render 'users/profile', user: @user %><br>
 	<%= render 'relationships/follow_button', user: @user %>
 <!--同コントローラーのviewで表示ならusersは省略可 -->
+<% if @user.id == current_user.id %>
+
+<% else %>
+  <% if @isChat == true %>
+    <p><a href="/chats/<%= @chatId %>">チャットへ</a>
+  <% else %>
+    <%= form_for @chat do |f| %>
+      <%= fields_for @user_room do |e| %>
+        <%= e.hidden_field :user_id, :value=> @user.id %>
+      <% end %>
+      <%= f.submit "チャットを始める" %>
+    <% end %>
+  <% end %>
+<% end %>
 	<%= render 'books/newform', book: @book %>
   </div>
   <div class="col-xs-9">

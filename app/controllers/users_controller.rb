@@ -6,7 +6,26 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@books = @user.books
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+    @currentUserUserRoom=UserRoom.where(user_id: current_user.id)
+    @userUserRoom=UserRoom.where(user_id: @user.id)
+    if @user.id == current_user.id
+    else
+      @currentUserUserRoom.each do |cu|
+        @userUserRoom.each do |u|
+          if cu.chat_id == u.chat_id then
+            @isChat = true
+            @chatId = cu.chat_id
+          end
+        end
+      end
+      if @isChat
+      else
+        @chat = Chat.new
+        @UserRoom = UserRoom.new
+      end
+    end
   end
+
 
   def index
     @user = User.find(current_user.id)
@@ -51,3 +70,4 @@ class UsersController < ApplicationController
    end
 
 end
+

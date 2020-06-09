@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     sessions:       'users/sessions',
     registrations:  'users/registrations'
   }
+  resources :rooms, :only => [:create]
+  resources :chats, :only => [:create, :show, :index]
   resources :users,only: [:show,:index,:edit,:update] do
   get 'followers' => 'relationships#followers'
   get 'follows' => 'relationships#follows'
