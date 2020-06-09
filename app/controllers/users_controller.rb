@@ -27,6 +27,17 @@ class UsersController < ApplicationController
   	end
   end
 
+  # メイラー機能実装するためのアクション
+  def create
+    @user = User.new(user_params)
+    if @user.save #ユーザーのインスタンスが新しく生成されて保存されたら
+      NotificationMailer.send_when_signup(@user).deliver #確認メールを送信
+      redirect_to user_path(current_user.id)
+    else
+      render request.referer
+    end
+  end
+
   private
   def user_params
   	params.require(:user).permit(:name, :introduction, :profile_image, :postcode, :prefecture_name, :address_city, :address_street, :address_building, :latitude, :longitude)
