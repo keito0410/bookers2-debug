@@ -5,8 +5,8 @@
   <h5><strong><a href="/users/<%= e.user.id %>"><%= e.user.email%>さん</a></strong></h5>
 <% end %>
 
-<div id="message">
-  <%= render 'message', rooms: @rooms %>
+<div id="messages">
+  <%= render 'messages', rooms: @rooms %>
 </div>
 <%= render 'form', room: @room, chat: @chat %>
 

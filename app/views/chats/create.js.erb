@@ -1,1 +1,1 @@
-$("#message").html("<%= j(render 'message', { rooms: @rooms }) %>"
+$('#messages').html("<%= j(render 'form',{ room: @room, chat: @chat }) %>");

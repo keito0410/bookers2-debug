@@ -59,6 +59,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # メールのサーバーを設定
+  # 
+  config.web_console.whitelisted_ips = '10.0.2.2'
 
 end
