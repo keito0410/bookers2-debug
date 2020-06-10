@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :follow
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverse_of_relationships, source: :user
+  has_many :chats
+  has_many :user_rooms
+  has_many :rooms, through: :user_room
   attachment :profile_image, destroy: false
 
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。

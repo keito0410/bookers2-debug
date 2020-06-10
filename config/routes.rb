@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'chats/:id' => 'chats#show', as: 'chat_path'
   devise_for :users, controllers: {
     sessions:       'users/sessions',
     registrations:  'users/registrations'

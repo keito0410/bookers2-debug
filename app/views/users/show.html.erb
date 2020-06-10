@@ -2,8 +2,11 @@
   <div class="col-xs-3">
 	<%= render 'users/profile', user: @user %><br>
 	<%= render 'relationships/follow_button', user: @user %>
+  <% if @user.id != current_user.id %>
+  <%= link_to 'チャットをする', chat_path_url %>
 <!--同コントローラーのviewで表示ならusersは省略可 -->
 	<%= render 'books/newform', book: @book %>
+  <% end %>
   </div>
   <div class="col-xs-9">
     <h2>Books</h2>
@@ -12,7 +15,7 @@
 		<thead>
 			<tr>
 				<th></th>
-				<th>Titlessssss</th>
+				<th>Title</th>
 				<th>Opinion</th>
 				<th colspan="3"></th>
 			</tr>
@@ -36,7 +39,6 @@
 </div>
 
 <!--Google Map 表示 -->
-
 <script type="text/javascript">
   function initMap() {
 // #latitude,longitudeから位置を特定
@@ -78,6 +80,7 @@
          margin-bottom: 80px;
          }
 </style>
-
+<% if @user.id == current_user.id %>
 <!-- #mapの表示 -->
 <div id="map"></div>
+<% end %>
